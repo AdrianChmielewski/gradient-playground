@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Zmienne CSS */
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* Podstawowe style */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Niestandardowe klasy */
+@layer components {
+  /* Karty */
+  .card-hover-effect {
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-lg hover:-translate-y-1;
+  }
+  
+  /* Przyciski */
+  .btn-gradient {
+    @apply relative overflow-hidden;
+  }
+  
+  .btn-gradient::before {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    @apply bg-gradient-to-r from-primary/20 to-secondary/20;
+    content: "";
+  }
+  
+  .btn-gradient:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Elementy formularza */
+  .input-gradient-focus {
+    @apply transition-all duration-200;
+    @apply focus:border-primary focus:ring-1 focus:ring-primary/30;
+  }
+  
+  /* Znaczniki (badges) */
+  .badge-gradient {
+    @apply bg-gradient-to-r from-primary/80 to-secondary/80 text-white;
+  }
+  
+  /* Menu */
+  .menu-item-active {
+    @apply bg-primary/10 text-primary font-medium;
+  }
+  
+  /* Kontenery z tłem gradientowym */
+  .gradient-container {
+    @apply bg-gradient-to-br from-primary/5 via-transparent to-secondary/5;
+    @apply rounded-xl p-6 shadow-sm;
+  }
+  
+  /* Niestandardowe karty */
+  .gradient-card {
+    @apply relative overflow-hidden rounded-xl shadow-md;
+    @apply transition-all duration-300 hover:shadow-xl;
+  }
+  
+  .gradient-card::before {
+    @apply absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-0;
+    @apply transition-opacity duration-300;
+    content: "";
+  }
+  
+  .gradient-card:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* Gradientowy tekst */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text;
+  }
+  
+  /* Kontenery animowane */
+  .animate-on-scroll {
+    @apply transition-all duration-500 opacity-0 translate-y-8;
+  }
+  .animate-on-scroll.visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+/* Niestandardowe animacje */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: hsl(var(--p));
+  }
+  50% {
+    border-color: hsl(var(--s));
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease-in-out infinite;
+}
+
+/* Preferencje redukcji ruchu */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Stylowanie scrollbara */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--b3));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--p) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--p) / 0.5);
+}
+
+/* Stylizacje dla drukarki */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* Grid do galerii gradientów */
+.gradient-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Efekt tła z kropkami */
+.dotted-pattern {
+  background-image: radial-gradient(circle at 1px 1px, hsl(var(--n) / 0.1) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Efekty interaktywne */
+.interactive-scale {
+  @apply transition-transform duration-300 ease-out;
+}
+
+.interactive-scale:hover {
+  transform: scale(1.025);
+}
+
+/* Tło z gradientem animowanym */
+.animated-gradient-bg {
+  background: linear-gradient(-45deg, 
+    hsl(var(--p)), 
+    hsl(var(--s)), 
+    hsl(var(--a)),
+    hsl(var(--p))
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Stylowanie dla dark mode */
+.dark {
+  color-scheme: dark;
+}
+
+/* Text shadow dla nazwy strony */
+.text-shadow-sm {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.text-shadow-md {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Stylizacja wyróżnionego linka */
+.fancy-link {
+  @apply relative inline-block text-primary font-medium;
+  @apply after:absolute after:w-full after:h-0.5 after:bg-primary/30 after:left-0 after:-bottom-1;
+  @apply after:transform after:scale-x-0 after:origin-bottom-right after:transition-transform after:duration-300;
+  @apply hover:after:scale-x-100 hover:after:origin-bottom-left;
+}
+
+/* Gradient border */
+.gradient-border {
+  position: relative;
+  border-radius: 0.5rem;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(to right, hsl(var(--p)), hsl(var(--s)));
+}
+
+/* Tła wzorkowe */
+.grid-pattern {
+  background-image: 
+    linear-gradient(to right, hsl(var(--n) / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--n) / 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Stylizacja kodu i przykładów */
+.code-block {
+  @apply bg-base-300 text-base-content p-4 rounded-md overflow-x-auto;
+  @apply font-mono text-sm;
+}
+
+/* Skrzynka z gradientem */
+.gradient-box {
+  @apply relative rounded-lg overflow-hidden;
+  @apply before:absolute before:inset-0 before:bg-gradient-to-br before:from-primary/10 before:to-secondary/10;
+  @apply after:absolute after:inset-px after:bg-base-100 after:rounded-lg;
+}
